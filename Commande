@@ -1,0 +1,28 @@
+const int PWM_M1 = 5;
+const int IN1_M1 = 2;
+const int IN2_M1 = 3;
+int speed = 100;
+
+void setup(){
+  Serial.begin(9600);
+  
+  
+  pinMode(PWM_M1,OUTPUT);
+  pinMode(PWM_M2,OUTPUT);
+  
+  pinMode(IN1_M1,OUTPUT);
+  pinMode(IN2_M1,OUTPUT);
+  
+  pinMode(IN1_M2,OUTPUT);
+  pinMode(IN2_M2,OUTPUT);
+}
+
+void loop(){
+
+  analogWrite(PWM_M1, speed);
+  
+  digitalWrite(IN1_M1, HIGH);
+  digitalWrite(IN2_M1, LOW);
+  
+  
+}
