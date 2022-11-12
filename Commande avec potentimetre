@@ -1,0 +1,42 @@
+int Potentiometre = A0; // Pin A0 Arduino vers broche du potentiometre
+int ValeurPot=0; // Valeur du potentiometre
+int PWM; // Variable PWM image de la vitesse
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+
+ 
+  
+}
+
+void loop()
+{
+  ValeurPot=analogRead(Potentiometre); // Lecture de la valeur analogique en sortie du potentiomètre
+  if(ValeurPot>498){ // Potentiometre vers la droite (sens normal)
+  	
+  	PWM=map(ValeurPot,498,1023,0,255); // Associer la valeur du potentiometre au signal PWM en gardant que la partie supérieur du potentiometre
+		digitalWrite(9,HIGH); // Activation de la broche Enable du L293D
+		digitalWrite(10,LOW); // Désactivation de la broche Input du L293D
+		analogWrite(11,PWM); // Envoi du signal PWM sur la sortie analogique 11
+     }
+  else if(ValeurPot<494){ // Potentiometre vers la gauche (sens inverse)
+		
+		PWM=map(ValeurPot,494,0,0,255); //Associer la valeur du Potentiometre au signal PWM en gardant que la partie inférieur du potentiometre
+		digitalWrite(9,LOW); // Désactivation de la broche Enable du L293D
+		digitalWrite(10,HIGH); // Activation de la broche Input du L293D
+		analogWrite(11,PWM); // Envoi du signal PWM sur la sortie analogique 11
+     }
+  else {// Potentiometre au centre arrêt moteur
+
+		digitalWrite(9,LOW); // Désactivation de la broche Enable du L293D
+		digitalWrite(10,LOW); // Désactivation de la broche Input du L293D
+		analogWrite(11,0); // Envoi du signal PWM sur la sortie analogique 11
+	}
+      	
+  
+  
+   
+}
