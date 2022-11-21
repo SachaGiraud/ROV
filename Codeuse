@@ -1,0 +1,43 @@
+#define PWM 3
+const int Ntotal = 11;
+int Nfonrt = 0;
+long date = millis ();
+
+void setup() {
+  attachInterrupt(0 , compteur , CHANGE);
+  
+  pinMode(12,OUTPUT); pinMode(9,OUTPUT);
+  digitalWrite(12,HIGH); digitalWrite(9,LOW);
+  
+  Serial.begin(9600);
+  }
+  
+  void loop(){
+    if (millis() - date > 100){
+      float Vitesse = Estime(Nfront);
+      
+      int variable = analogRead(A3);
+      int Commande = map(variable, 0 , 1023, 0 ,255);
+      analogWrite(PWM,Commande);
+      float Alpha = ((float) 100*Commande/255;
+      
+      Affiche(Vitesse, Alpha)
+      }
+  }
+  
+ void compter(){
+ Nfront++
+ }
+ 
+ float Estime(int, N){
+ float estimation = (float) N / Ntotal / 0.1*60;
+ date = millis();
+ return(estimation);
+ }
+ 
+ void Affiche ( float v, float a){
+    Serial.print(v); Serial.print(",");
+    Serial.print(a); Serial.print();
+    
+ 
+ 
