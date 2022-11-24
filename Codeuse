@@ -1,6 +1,6 @@
 #define PWM 3
-const int Ntotal = 11;
-int Nfonrt = 0;
+const int Ntotal = 483;
+int Nfront = 0;
 long date = millis ();
 
 void setup() {
@@ -10,9 +10,11 @@ void setup() {
   digitalWrite(12,HIGH); digitalWrite(9,LOW);
   
   Serial.begin(9600);
-  }
+}
   
-  void loop(){
+void loop(){
+
+    
     if (millis() - date > 100){
       float Vitesse = Estime(Nfront);
       
@@ -26,7 +28,7 @@ void setup() {
   }
   
  void compter(){
- Nfront++
+    Nfront++
  }
  
  float Estime(int, N){
@@ -37,7 +39,8 @@ void setup() {
  
  void Affiche ( float v, float a){
     Serial.print(v); Serial.print(",");
-    Serial.print(a); Serial.print();
+    Serial.print(a); Serial.print(",");
+ }
     
  
  
